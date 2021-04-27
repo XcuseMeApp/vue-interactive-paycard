@@ -115,7 +115,7 @@ export default {
           event.target.value = event.target.value.replace(/[^0-9]/g, '')
           if (event.charCode >= 48 && event.charCode <= 57) {
             return true
-          }
+          }asdasd
           event.preventDefault()
         }
         el.addEventListener('keypress', checkValue)
