@@ -41,9 +41,6 @@ export default {
     },
     updateCardCvv (val) {
     }
-  },
-  mounted () {
-    this.$i18n.locale = navigator.language
   }
 }
 </script>
