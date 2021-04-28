@@ -41,6 +41,7 @@
             <label for="cardMonth" class="card-input__label">Expiration Date</label>
             <select
               class="card-input__input -select"
+              name="month"
               :id="fields.cardMonth"
               v-model="formData.cardMonth"
               @change="changeMonth"
@@ -56,6 +57,7 @@
             </select>
             <select
               class="card-input__input -select"
+              name="year"
               :id="fields.cardYear"
               v-model="formData.cardYear"
               @change="changeYear"
@@ -74,6 +76,7 @@
             <label for="cardCvv" class="card-input__label">CVV</label>
             <input
               type="tel"
+              name="cvv2"
               class="card-input__input"
               v-number-only
               :id="fields.cardCvv"
@@ -88,9 +91,10 @@
       </div>
       <div class="card-form__row">
         <div class="card-form__col -cardholder">
-          <label for="cardName" class="card-input__label">Card Holder Name</label>
+          <label for="cardName" class="card-input__label">Card Holder</label>
           <input
             type="text"
+            name="nameoncard"
             :id="fields.cardName"
             v-letter-only
             @input="changeName"
