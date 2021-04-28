@@ -7,6 +7,7 @@
         :isCardNumberMasked="isCardNumberMasked"
         :randomBackgrounds="randomBackgrounds"
         :backgroundImage="backgroundImage"
+        :imageBaseUrl="imageBaseUrl"
       />
     </div>
     <div class="card-form__inner">
@@ -33,21 +34,9 @@
           @click="toggleMask"
         ></button>
       </div>
-      <div class="card-input">
-        <label for="cardName" class="card-input__label">Card Name</label>
-        <input
-          type="text"
-          :id="fields.cardName"
-          v-letter-only
-          @input="changeName"
-          class="card-input__input"
-          :value="formData.cardName"
-          data-card-field
-          autocomplete="off"
-        />
-      </div>
-      <div class="card-form__row">
-        <div class="card-form__col">
+
+      <div class="card-input card-form__row">
+        <div class="card-form__col card-form__row">
           <div class="card-form__group">
             <label for="cardMonth" class="card-input__label">Expiration Date</label>
             <select
@@ -57,7 +46,7 @@
               @change="changeMonth"
               data-card-field
             >
-              <option value disabled selected>Month</option>
+              <option value disabled selected>MM</option>
               <option
                 v-bind:value="n < 10 ? '0' + n : n"
                 v-for="n in 12"
@@ -72,17 +61,16 @@
               @change="changeYear"
               data-card-field
             >
-              <option value disabled selected>Year</option>
+              <option value disabled selected>YY</option>
               <option
                 v-bind:value="$index + minCardYear"
                 v-for="(n, $index) in 12"
                 v-bind:key="n"
               >{{$index + minCardYear}}</option>
             </select>
+
           </div>
-        </div>
-        <div class="card-form__col -cvv">
-          <div class="card-input">
+          <div class="card-form__col -cvv">
             <label for="cardCvv" class="card-input__label">CVV</label>
             <input
               type="tel"
@@ -98,8 +86,36 @@
           </div>
         </div>
       </div>
-
-      <button class="card-form__button" v-on:click="invaildCard">Submit</button>
+      <div class="card-form__row">
+        <div class="card-form__col -cardholder">
+          <label for="cardName" class="card-input__label">Card Holder Name</label>
+          <input
+            type="text"
+            :id="fields.cardName"
+            v-letter-only
+            @input="changeName"
+            class="card-input__input"
+            :value="formData.cardName"
+            data-card-field
+            autocomplete="off"
+          />
+        </div>
+        <div class="card-form__col -zip">
+            <label for="cardZipCode" class="card-input__label">Zip Code</label>
+            <input
+              type="tel"
+              class="card-input__input"
+              v-number-only
+              :id="fields.cardZipCode"
+              maxlength="5"
+              :value="formData.cardZipCode"
+              @input="changeZipCode"
+              data-card-field
+              autocomplete="off"
+            />
+          </div>
+      </div>
+      <button class="card-form__button" v-on:click="invaildCard">SUBMIT</button>
     </div>
   </div>
 </template>
@@ -142,7 +158,8 @@ export default {
           cardNumber: '',
           cardMonth: '',
           cardYear: '',
-          cardCvv: ''
+          cardCvv: '',
+          cardZipCode: ''
         }
       }
     },
@@ -150,6 +167,10 @@ export default {
     randomBackgrounds: {
       type: Boolean,
       default: true
+    },
+    imageBaseUrl: {
+      type: String,
+      default: "../assets/images"
     }
   },
   components: {
@@ -162,7 +183,8 @@ export default {
         cardName: 'v-card-name',
         cardMonth: 'v-card-month',
         cardYear: 'v-card-year',
-        cardCvv: 'v-card-cvv'
+        cardCvv: 'v-card-cvv',
+        cardZipCode: 'v-card-zipcode'
       },
       minCardYear: new Date().getFullYear(),
       isCardNumberMasked: true,
@@ -219,6 +241,10 @@ export default {
     changeCvv (e) {
       this.formData.cardCvv = e.target.value
       this.$emit('input-card-cvv', this.formData.cardCvv)
+    },
+    changeZipCode (e) {
+      this.formData.cardZipCode = e.target.value
+      this.$emit('input-card-zipcode', this.formData.cardZipCode)
     },
     invaildCard () {
       let number = this.formData.cardNumber

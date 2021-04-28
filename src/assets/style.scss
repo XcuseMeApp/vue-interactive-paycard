@@ -14,10 +14,13 @@ body {
 .wrapper {
   min-height: 100vh;
   display: flex;
-  padding: 50px 15px;
+  padding: 0px 15px 18px 15px;
   @media screen and (max-width: 700px), (max-height: 500px) {
     flex-wrap: wrap;
     flex-direction: column;
+  }
+  @media screen and (max-width: 330px) {
+    padding: 0px;
   }
 }
 
@@ -25,7 +28,6 @@ body {
   max-width: 570px;
   margin: auto;
   width: 100%;
-
   @media screen and (max-width: 576px) {
     margin: 0 auto;
   }
@@ -68,7 +70,7 @@ body {
       margin-right: 0;
       flex: unset;
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 2px;
 
       &:last-child {
         margin-bottom: 0;
@@ -76,8 +78,29 @@ body {
     }
 
     &.-cvv {
-      max-width: 150px;
+      max-width: 100%;
+      padding-left: 20px;
       @media screen and (max-width: 480px) {
+        padding-left: 8px;
+        width: 30%;
+        max-width: initial;
+      }
+    }
+
+    &.-cardholder {
+      width: 70%;
+      @media screen and (max-width: 480px) {
+        padding-right: 8px;
+        width: 60%;
+        max-width: initial;
+      }
+    }
+
+    &.-zip {
+      width: 30%;
+      @media screen and (max-width: 480px) {
+        padding-left: 15px;
+        width: 40%;
         max-width: initial;
       }
     }
@@ -87,13 +110,14 @@ body {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    max-width: 70%;
 
     .card-input__input {
       flex: 1;
       margin-right: 15px;
 
       &:last-child {
-        margin-right: 0;
+        margin-right: 15px;
       }
     }
   }
@@ -101,13 +125,13 @@ body {
   &__button {
     width: 100%;
     height: 55px;
-    background: #2364d2;
+    background: #96d09b;
     border: none;
     border-radius: 5px;
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 600;
     font-family: "Source Sans Pro", sans-serif;
-    box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+    // box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
     color: #fff;
     margin-top: 20px;
     cursor: pointer;
@@ -186,7 +210,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     // box-shadow: 3px 13px 30px 0px rgba(11, 19, 41, 0.5);
-    box-shadow: 0 20px 60px 0 rgba(14, 42, 90, 0.55);
+    box-shadow: 0 15px 40px 0 rgba(14, 42, 90, 0.55);
     transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
     transform-style: preserve-3d;
     transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
@@ -436,7 +460,7 @@ body {
 
     @media screen and (max-width: 480px) {
       font-size: 12px;
-      padding-bottom: 5px;
+      padding-bottom: 0px;
     }
   }
   &__band {
@@ -504,16 +528,16 @@ body {
   margin-bottom: -130px;
 
   @media screen and (max-width: 480px) {
-    margin-bottom: -120px;
+    margin-bottom: -140px;
   }
 }
 
 .card-input {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
   &__label {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     font-weight: 500;
     color: #1a3b5d;
     width: 100%;
@@ -522,7 +546,7 @@ body {
   }
   &__input {
     width: 100%;
-    height: 50px;
+    height: 36px;
     border-radius: 5px;
     box-shadow: none;
     border: 1px solid #ced6e0;
@@ -557,7 +581,7 @@ body {
     height: 1em;
     font-size: 24px;
     border-radius: 50%;
-    top: 35px;
+    top: 27px;
     right: 10px;
     opacity: .75;
     color: #8c9cae;

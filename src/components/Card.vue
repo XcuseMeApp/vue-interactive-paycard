@@ -17,13 +17,13 @@
       <div class="card-item__wrapper">
         <div class="card-item__top">
           <img
-            src="https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/chip.png"
+            :src="`${imageBaseUrl}/chip.png`"
             class="card-item__chip"
           />
           <div class="card-item__type">
             <transition name="slide-fade-up">
               <img
-                :src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + cardType + '.png'"
+                :src="`${imageBaseUrl}/${cardType}.png`"
                 v-if="cardType"
                 :key="cardType"
                 alt
@@ -104,7 +104,7 @@
         </div>
         <div class="card-item__type">
           <img
-            :src="'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' + cardType + '.png'"
+            :src="`${imageBaseUrl}/${cardType}.png`"
             v-if="cardType"
             class="card-item__typeImg"
           />
@@ -125,7 +125,8 @@ export default {
       type: Boolean,
       default: true
     },
-    backgroundImage: [String, Object]
+    backgroundImage: [String, Object],
+    imageBaseUrl: String
   },
   data () {
     return {
@@ -206,7 +207,7 @@ export default {
     currentCardBackground () {
       if (this.randomBackgrounds && !this.backgroundImage) { // TODO will be optimized
         let random = Math.floor(Math.random() * 25 + 1)
-        return `https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/${random}.jpeg`
+        return `${this.imageBaseUrl}/${random}.jpeg`
       } else if (this.backgroundImage) {
         return this.backgroundImage
       } else {
