@@ -23,7 +23,8 @@
           :value="formData.cardNumber"
           :maxlength="cardNumberMaxLength"
           data-card-field
-          autocomplete="off"
+          name="cardnumber"
+          autocomplete="cc-number"
         />
         <button
           class="card-input__eye"
@@ -41,11 +42,12 @@
             <label for="cardMonth" class="card-input__label">Expiration Date</label>
             <select
               class="card-input__input -select"
-              name="month"
+              name="ccmonth"
               :id="fields.cardMonth"
               v-model="formData.cardMonth"
               @change="changeMonth"
               data-card-field
+              autocomplete="cc-exp-month"
             >
               <option value disabled selected>MM</option>
               <option
@@ -57,11 +59,12 @@
             </select>
             <select
               class="card-input__input -select"
-              name="year"
+              name="ccyear"
               :id="fields.cardYear"
               v-model="formData.cardYear"
               @change="changeYear"
               data-card-field
+              autocomplete="cc-exp-year"
             >
               <option value disabled selected>YY</option>
               <option
@@ -73,10 +76,10 @@
 
           </div>
           <div class="card-form__col -cvv">
-            <label for="cardCvv" class="card-input__label">CVV</label>
+            <label for="cardCvv" class="card-input__label">CVC</label>
             <input
               type="tel"
-              name="cvv2"
+              name="cvc"
               class="card-input__input"
               v-number-only
               :id="fields.cardCvv"
@@ -84,24 +87,24 @@
               :value="formData.cardCvv"
               @input="changeCvv"
               data-card-field
-              autocomplete="off"
+              autocomplete="cc-csc"
             />
           </div>
         </div>
       </div>
       <div class="card-form__row">
         <div class="card-form__col -cardholder">
-          <label for="cardName" class="card-input__label">Card Holder</label>
+          <label for="cardName" class="card-input__label">Name on card</label>
           <input
             type="text"
-            name="nameoncard"
+            name="ccname"
             :id="fields.cardName"
             v-letter-only
             @input="changeName"
             class="card-input__input"
             :value="formData.cardName"
             data-card-field
-            autocomplete="off"
+            autocomplete="cc-name"
           />
         </div>
         <div class="card-form__col -zip">
