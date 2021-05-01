@@ -123,13 +123,19 @@
             />
           </div>
       </div>
-      <button class="card-form__button" v-on:click="invaildCard">SUBMIT</button>
+      <button class="card-form__button" @click="submitCard">SUBMIT</button>
     </div>
   </div>
 </template>
 
 <script>
 import Card from './Card'
+  import {
+    isValid,
+    isExpirationDateValid,
+    isSecurityCodeValid,
+    getCreditCardNameByNumber
+  } from 'creditcard.js';
 export default {
   name: 'CardForm',
   directives: {
@@ -254,25 +260,25 @@ export default {
       this.formData.cardZipCode = e.target.value
       this.$emit('input-card-zipcode', this.formData.cardZipCode)
     },
-    invaildCard () {
-      let number = this.formData.cardNumber
-      let sum = 0
-      let isOdd = true
-      for (let i = number.length - 1; i >= 0; i--) {
-        let num = number.charAt(i)
-        if (isOdd) {
-          sum += num
-        } else {
-          num = num * 2
-          if (num > 9) {
-            num = num.toString().split('').join('+')
-          }
-          sum += num
-        }
-        isOdd = !isOdd
-      }
-      if (sum % 10 !== 0) {
-        alert('invaild card number')
+    submitCard () {
+      // check that all fileds are present:
+      if (!this.formData.cardName ||
+          !this.formData.cardNumber ||
+          !this.formData.cardMonth ||
+          !this.formData.cardYear ||
+          !this.formData.cardCvv ||
+          !this.formData.cardZipCode) {
+        this.$emit('error', 'All fields are required.')
+      } else if (!isValid(this.formData.cardNumber)) {
+        this.$emit('error', 'Card number is invalid. Please check your input or try another card.')
+      } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear)) {
+        this.$emit('error', 'Card expiration is invalid or card has expired.')
+      } else if(!isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
+        this.$emit('error', 'Card security code is invalid.')
+      } else if (this.formData.cardZipCode.length!==5) {
+        this.$emit('error', 'Zip code is incorrect. Reenter and try again.')
+      } else {
+        this.$emit('validated')
       }
     },
     blurCardNumber () {
