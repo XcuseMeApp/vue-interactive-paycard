@@ -263,20 +263,20 @@ export default {
     submitCard () {
       // check that all fileds are present:
       if (!this.formData.cardName ||
-          !this.formData.cardNumber ||
+          !this.mainCardNumber ||
           !this.formData.cardMonth ||
           !this.formData.cardYear ||
           !this.formData.cardCvv ||
           !this.formData.cardZipCode) {
-        this.$emit('error', 'All fields are required.')
-      } else if (!isValid(this.formData.cardNumber)) {
-        this.$emit('error', 'Card number is invalid. Please check your input or try another card.')
-      } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear)) {
-        this.$emit('error', 'Card expiration is invalid or card has expired.')
-      } else if(!isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
-        this.$emit('error', 'Card security code is invalid.')
+        this.$emit('error', { title: 'Oops...', message: 'All fields are required.'})
+      } else if (!isValid(this.mainCardNumber)) {
+        this.$emit('error', { title: 'Card number is invalid.', message: 'Please check your input or try another card.'})
+      } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear.toString())) {
+        this.$emit('error', { title: 'Card has expired.', message: 'Please correct expiration or try another card.'})
+      } else if(!isSecurityCodeValid(this.mainCardNumber, this.formData.cardCvv)) {
+        this.$emit('error', { title: 'Card security code is invalid.', message: 'Please check that you entered it correctly and try again'})
       } else if (this.formData.cardZipCode.length!==5) {
-        this.$emit('error', 'Zip code is incorrect. Reenter and try again.')
+        this.$emit('error', { title: 'Invalid Zip Code.', message: 'Reenter and try again.'})
       } else {
         this.$emit('validated')
       }
