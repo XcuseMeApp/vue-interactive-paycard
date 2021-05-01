@@ -36,12 +36,12 @@
     padding-top: 180px;
 
     @media screen and (min-width: 480px) {
-      box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+      // box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
       padding: 25px;
       padding-top: 165px;
     }
     @media screen and (max-width: 480px) {
-      box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+      // box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
       padding: 25px;
       padding-top: 165px;
     }
@@ -213,7 +213,7 @@
     border-radius: 15px;
     overflow: hidden;
     // box-shadow: 3px 13px 30px 0px rgba(11, 19, 41, 0.5);
-    box-shadow: 0 10px 30px 0px rgba(14, 42, 90, 0.55);
+    // box-shadow: 0 10px 30px 0px rgba(14, 42, 90, 0.55);
     transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
     transform-style: preserve-3d;
     transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
