@@ -123,7 +123,7 @@
             />
           </div>
       </div>
-      <button class="card-form__button" @click="submitCard">SUBMIT</button>
+      <button class="card-form__button" @click="submitCard">{{ total ? `PAY $${total.toFixed(2)}` : 'SUBMIT'}}</button>
     </div>
   </div>
 </template>
@@ -185,6 +185,10 @@ export default {
     imageBaseUrl: {
       type: String,
       default: "../assets/images"
+    },
+    total: {
+      type: Number,
+      default: 0
     }
   },
   components: {
