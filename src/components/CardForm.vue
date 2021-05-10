@@ -12,11 +12,11 @@
     </div>
     <div class="card-form__inner">
       <div class="card-input">
-        <label for="cardNumber" class="card-input__label">Card Number</label>
+        <label for="ccnumber" class="card-input__label">Card Number</label>
         <input
           type="tel"
-          id="credit-card-number"
-          name="cardnumber"
+          id="ccnumber"
+          name="ccnumber"
           autocomplete="cc-number"
           @input="changeNumber"
           @focus="focusCardNumber"
@@ -39,7 +39,7 @@
       <div class="card-input card-form__row">
         <div class="card-form__col card-form__row">
           <div class="card-form__group">
-            <label for="cardMonth" class="card-input__label">Expiration Date</label>
+            <label for="cc-exp-month" class="card-input__label">Expiration Date</label>
             <select
               class="card-input__input -select"
               id="cc-exp-month"
@@ -77,7 +77,7 @@
 
           </div>
           <div class="card-form__col -cvv">
-            <label for="cardCvv" class="card-input__label">CVV</label>
+            <label for="cvv2" class="card-input__label">CVV</label>
             <input
               type="text"
               id="cvv2"
@@ -96,7 +96,7 @@
       </div>
       <div class="card-form__row">
         <div class="card-form__col -cardholder">
-          <label for="cardName" class="card-input__label">Name on Card</label>
+          <label for="nameoncard" class="card-input__label">Name on Card</label>
           <input
             type="text"
             id="nameoncard"
@@ -110,18 +110,19 @@
           />
         </div>
         <div class="card-form__col -zip">
-            <label for="cardZipCode" class="card-input__label">Zip Code</label>
+            <label for="postal-code" class="card-input__label">Zip Code</label>
             <input
               type="tel"
               class="card-input__input"
               v-number-only
-              id="postalcode"
-              name="postalcode"
+              id="postal-code"
+              name="postal-code"
+              autocomplete="postal-code"
               maxlength="5"
               :value="formData.cardZipCode"
               @input="changeZipCode"
               data-card-field
-              autocomplete="postal-code"
+
             />
           </div>
       </div>
