@@ -15,7 +15,9 @@
         <label for="cardNumber" class="card-input__label">Card Number</label>
         <input
           type="tel"
-          :id="fields.cardNumber"
+          id="credit-card-number"
+          name="cardnumber"
+          autocomplete="cc-number"
           @input="changeNumber"
           @focus="focusCardNumber"
           @blur="blurCardNumber"
@@ -23,8 +25,6 @@
           :value="formData.cardNumber"
           :maxlength="cardNumberMaxLength"
           data-card-field
-          name="cardnumber"
-          autocomplete="cc-number"
         />
         <button
           class="card-input__eye"
@@ -42,12 +42,13 @@
             <label for="cardMonth" class="card-input__label">Expiration Date</label>
             <select
               class="card-input__input -select"
+              id="cc-exp-month"
               name="cc-exp-month"
-              :id="fields.cardMonth"
+              autocomplete="cc-exp-month"
               v-model="formData.cardMonth"
               @change="changeMonth"
               data-card-field
-              autocomplete="cc-exp-month"
+
             >
               <option value disabled selected>MM</option>
               <option
@@ -59,12 +60,12 @@
             </select>
             <select
               class="card-input__input -select"
+              id="cc-exp-year"
               name="cc-exp-year"
-              :id="fields.cardYear"
+              autocomplete="cc-exp-year"
               v-model="formData.cardYear"
               @change="changeYear"
               data-card-field
-              autocomplete="cc-exp-year"
             >
               <option value disabled selected>YY</option>
               <option
@@ -79,15 +80,16 @@
             <label for="cardCvv" class="card-input__label">CVV</label>
             <input
               type="text"
+              id="cvv2"
               name="cvv2"
+              autocomplete="cc-csc"
               class="card-input__input"
               v-number-only
-              :id="fields.cardCvv"
               maxlength="4"
               :value="formData.cardCvv"
               @input="changeCvv"
               data-card-field
-              autocomplete="cc-csc"
+
             />
           </div>
         </div>
@@ -97,14 +99,14 @@
           <label for="cardName" class="card-input__label">Name on Card</label>
           <input
             type="text"
+            id="nameoncard"
             name="nameoncard"
-            :id="fields.cardName"
+            autocomplete="cc-name"
             v-letter-only
             @input="changeName"
             class="card-input__input"
             :value="formData.cardName"
             data-card-field
-            autocomplete="cc-name"
           />
         </div>
         <div class="card-form__col -zip">
@@ -113,17 +115,17 @@
               type="tel"
               class="card-input__input"
               v-number-only
-              :id="fields.cardZipCode"
+              id="postalcode"
+              name="postalcode"
               maxlength="5"
               :value="formData.cardZipCode"
               @input="changeZipCode"
               data-card-field
-              name="postalcode"
               autocomplete="postal-code"
             />
           </div>
       </div>
-      <button class="card-form__button" @click="submitCard">{{ total ? `PAY $${total.toFixed(2)}` : 'SUBMIT'}}</button>
+      <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
     </div>
   </div>
 </template>
