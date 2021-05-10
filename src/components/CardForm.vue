@@ -237,8 +237,15 @@ export default {
       this.$emit('input-card-name', this.formData.cardName)
     },
     changeNumber (e) {
-      this.formData.cardNumber = e.target.value
+      if (`${e.target.value} `===this.formData.cardNumber) {
+        // remove one extra digit from e
+        this.formData.cardNumber = e.target.value.slice(0, e.target.value.length-1)
+      } else {
+        this.formData.cardNumber = e.target.value
+      }
+
       let value = this.formData.cardNumber.replace(/\D/g, '')
+
       // american express, 15 digits
       if ((/^3[47]\d{0,13}$/).test(value)) {
         this.formData.cardNumber = value.replace(/(\d{4})/, '$1 ').replace(/(\d{4}) (\d{6})/, '$1 $2 ')
