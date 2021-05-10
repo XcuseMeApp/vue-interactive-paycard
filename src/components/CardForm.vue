@@ -130,21 +130,63 @@
     </div> -->
     <form method="post" id="usrForm">
 
-<div>
-  <label for="nameoncard">Name on Card</label>
-  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name">
-</div>
+
 <div>
   <label for="ccnumber">Credit Card Number</label>
   <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number">
 </div>
-<div>
+<div class="card-form__group">
+  <label for="cc-exp-month" class="card-input__label">Expiration Month</label>
+  <select
+    class="card-input__input -select"
+    id="cc-exp-month"
+    name="cc-exp-month"
+    autocomplete="cc-exp-month"
+    v-model="formData.cardMonth"
+    @change="changeMonth"
+    data-card-field
+
+  >
+    <option value disabled selected>MM</option>
+    <option
+      v-bind:value="n < 10 ? '0' + n : n"
+      v-for="n in 12"
+      v-bind:disabled="n < minCardMonth"
+      v-bind:key="n"
+    >{{generateMonthValue(n)}}</option>
+  </select>
+  <label for="cc-exp-month" class="card-input__label">Expiration Year</label>
+  <select
+    class="card-input__input -select"
+    id="cc-exp-year"
+    name="cc-exp-year"
+    autocomplete="cc-exp-year"
+    v-model="formData.cardYear"
+    @change="changeYear"
+    data-card-field
+  >
+    <option value disabled selected>YY</option>
+    <option
+      v-bind:value="$index + minCardYear"
+      v-for="(n, $index) in 12"
+      v-bind:key="n"
+    >{{$index + minCardYear}}</option>
+  </select>
+
+</div>
+
+
+<!-- <div>
   <label for="cc-exp-month">Expiration Month</label>
   <input type="number" id="cc-exp-month" name="cc-exp-month" autocomplete="cc-exp-month">
   </div>
 <div>
   <label for="cc-exp-year">Expiration Year</label>
   <input type="number" id="cc-exp-year" name="cc-exp-year" autocomplete="cc-exp-year">
+</div> -->
+<div>
+  <label for="nameoncard">Name on Card</label>
+  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name">
 </div>
 <div>
   <label for="cvv2">CVV</label>
