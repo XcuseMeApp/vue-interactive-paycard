@@ -209,7 +209,6 @@
             id="nameoncard"
             name="nameoncard"
             autocomplete="cc-name"
-s
             @input="changeName"
             class="card-input__input"
             :value="formData.cardName"
