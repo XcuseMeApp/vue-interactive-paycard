@@ -132,8 +132,24 @@
 
 
 <div>
-  <label for="ccnumber">Credit Card Number</label>
-  <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number">
+  <!-- <label for="ccnumber">Credit Card Number</label>
+  <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number"> -->
+
+        <label for="ccnumber" class="card-input__label">Card Number</label>
+        <input
+          type="tel"
+          id="ccnumber"
+          name="ccnumber"
+          autocomplete="cc-number"
+          @input="changeNumber"
+          @focus="focusCardNumber"
+          @blur="blurCardNumber"
+          class="card-input__input"
+          :value="formData.cardNumber"
+          :maxlength="cardNumberMaxLength"
+          data-card-field
+        />
+
 </div>
 <div class="card-form__group">
   <label for="cc-exp-month" class="card-input__label">Expiration Month</label>
@@ -185,8 +201,22 @@
   <input type="number" id="cc-exp-year" name="cc-exp-year" autocomplete="cc-exp-year">
 </div> -->
 <div>
-  <label for="nameoncard">Name on Card</label>
-  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name">
+  <!-- <label for="nameoncard">Name on Card</label>
+  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name"> -->
+          <label for="nameoncard" class="card-input__label">Name on Card</label>
+          <input
+            type="text"
+            id="nameoncard"
+            name="nameoncard"
+            autocomplete="cc-name"
+s
+            @input="changeName"
+            class="card-input__input"
+            :value="formData.cardName"
+            data-card-field
+          />
+
+
 </div>
 <div>
   <label for="cvv2">CVV</label>
