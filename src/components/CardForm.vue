@@ -10,7 +10,7 @@
         :imageBaseUrl="imageBaseUrl"
       />
     </div> -->
-    <!-- <div class="card-form__inner">
+    <div class="card-form__inner">
       <div class="card-input">
         <label for="ccnumber" class="card-input__label">Card Number</label>
         <input
@@ -127,13 +127,15 @@
           </div>
       </div>
       <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
-    </div> -->
+    </div>
+
+<!--
     <form method="post" id="usrForm">
 
 
 <div>
-  <!-- <label for="ccnumber">Credit Card Number</label>
-  <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number"> -->
+  <label for="ccnumber">Credit Card Number</label>
+  <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number">
 
         <label for="ccnumber" class="card-input__label">Card Number</label>
         <input
@@ -192,17 +194,17 @@
 </div>
 
 
-<!-- <div>
+<div>
   <label for="cc-exp-month">Expiration Month</label>
   <input type="number" id="cc-exp-month" name="cc-exp-month" autocomplete="cc-exp-month">
   </div>
 <div>
   <label for="cc-exp-year">Expiration Year</label>
   <input type="number" id="cc-exp-year" name="cc-exp-year" autocomplete="cc-exp-year">
-</div> -->
+</div>
 <div>
-  <!-- <label for="nameoncard">Name on Card</label>
-  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name"> -->
+  <label for="nameoncard">Name on Card</label>
+  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name">
           <label for="nameoncard" class="card-input__label">Name on Card</label>
           <input
             type="text"
@@ -223,7 +225,7 @@
 </div>
 
 
-</form>
+</form> -->
   </div>
 </template>
 
