@@ -10,6 +10,7 @@
         :imageBaseUrl="imageBaseUrl"
       />
     </div> -->
+    <form method="post" id="usrForm">
     <div class="card-form__inner">
       <div class="card-input">
         <label for="ccnumber" class="card-input__label">Card Number</label>
@@ -128,7 +129,7 @@
       </div>
       <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
     </div>
-
+</form>
 <!--
     <form method="post" id="usrForm">
 
