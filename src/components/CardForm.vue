@@ -10,7 +10,7 @@
         :imageBaseUrl="imageBaseUrl"
       />
     </div> -->
-    <form method="post" id="usrForm">
+    <form @submit="preventSubmit" method="post" id="usrForm">
     <div class="card-form__inner">
       <div class="card-input">
         <label for="ccnumber" class="card-input__label">Card Number</label>
@@ -325,10 +325,12 @@ export default {
       }
     }
   },
-  mounted () {
-    this.maskCardNumber()
-  },
+
   methods: {
+    preventSubmit(event) {
+      event.preventDefault()
+    },
+
     generateMonthValue (n) {
       return n < 10 ? `0${n}` : n
     },
@@ -423,6 +425,9 @@ export default {
         this.unMaskCardNumber()
       }
     }
+  },
+  mounted () {
+    this.maskCardNumber()
   }
 }
 </script>
