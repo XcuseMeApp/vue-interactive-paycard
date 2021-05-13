@@ -1,6 +1,6 @@
 <template>
   <div class="card-form">
-    <!-- <div class="card-list">
+    <div class="card-list">
       <Card
         :fields="fields"
         :labels="formData"
@@ -9,224 +9,127 @@
         :backgroundImage="backgroundImage"
         :imageBaseUrl="imageBaseUrl"
       />
-    </div> -->
+    </div>
     <form @submit="preventSubmit" method="post" id="usrForm">
-    <div class="card-form__inner">
-      <div class="card-input">
-        <label for="ccnumber" class="card-input__label">Card Number</label>
-        <input
-          type="tel"
-          id="ccnumber"
-          name="ccnumber"
-          autocomplete="cc-number"
-          @input="changeNumber"
-          @focus="focusCardNumber"
-          @blur="blurCardNumber"
-          class="card-input__input"
-          :value="formData.cardNumber"
-          :maxlength="cardNumberMaxLength"
-          data-card-field
-        />
-        <button
-          class="card-input__eye"
-          :class="{ '-active' : !isCardNumberMasked }"
-          title="Show/Hide card number"
-          tabindex="-1"
-          :disabled="formData.cardNumber === ''"
-          @click="toggleMask"
-        ></button>
-      </div>
+      <div class="card-form__inner">
+        <div class="card-input">
+          <label for="ccnumber" class="card-input__label">Card Number</label>
+          <input
+            type="tel"
+            id="ccnumber"
+            name="ccnumber"
+            autocomplete="cc-number"
+            @input="changeNumber"
+            @focus="focusCardNumber"
+            @blur="blurCardNumber"
+            class="card-input__input"
+            :value="formData.cardNumber"
+            :maxlength="cardNumberMaxLength"
+            data-card-field
+          />
+          <!-- <button
+            class="card-input__eye"
+            :class="{ '-active' : !isCardNumberMasked }"
+            title="Show/Hide card number"
+            tabindex="-1"
+            :disabled="formData.cardNumber === ''"
+            @click="toggleMask"
+          ></button> -->
+        </div>
 
-      <div class="card-input card-form__row">
-        <div class="card-form__col card-form__row">
-          <div class="card-form__group">
-            <label for="cc-exp-month" class="card-input__label">Expiration Date</label>
-            <select
-              class="card-input__input -select"
-              id="cc-exp-month"
-              name="cc-exp-month"
-              autocomplete="cc-exp-month"
-              v-model="formData.cardMonth"
-              @change="changeMonth"
-              data-card-field
+        <div class="card-input card-form__row">
+          <div class="card-form__col card-form__row">
+            <div class="card-form__group">
+              <label for="cc-exp-month" class="card-input__label">Expiration Date</label>
+              <select
+                class="card-input__input -select"
+                id="cc-exp-month"
+                name="cc-exp-month"
+                autocomplete="cc-exp-month"
+                v-model="formData.cardMonth"
+                @change="changeMonth"
+                data-card-field
 
-            >
-              <option value disabled selected>MM</option>
-              <option
-                v-bind:value="n < 10 ? '0' + n : n"
-                v-for="n in 12"
-                v-bind:disabled="n < minCardMonth"
-                v-bind:key="n"
-              >{{generateMonthValue(n)}}</option>
-            </select>
-            <select
-              class="card-input__input -select"
-              id="cc-exp-year"
-              name="cc-exp-year"
-              autocomplete="cc-exp-year"
-              v-model="formData.cardYear"
-              @change="changeYear"
-              data-card-field
-            >
-              <option value disabled selected>YY</option>
-              <option
-                v-bind:value="$index + minCardYear"
-                v-for="(n, $index) in 12"
-                v-bind:key="n"
-              >{{$index + minCardYear}}</option>
-            </select>
+              >
+                <option value disabled selected>MM</option>
+                <option
+                  v-bind:value="n < 10 ? '0' + n : n"
+                  v-for="n in 12"
+                  v-bind:disabled="n < minCardMonth"
+                  v-bind:key="n"
+                >{{generateMonthValue(n)}}</option>
+              </select>
+              <select
+                class="card-input__input -select"
+                id="cc-exp-year"
+                name="cc-exp-year"
+                autocomplete="cc-exp-year"
+                v-model="formData.cardYear"
+                @change="changeYear"
+                data-card-field
+              >
+                <option value disabled selected>YY</option>
+                <option
+                  v-bind:value="$index + minCardYear"
+                  v-for="(n, $index) in 12"
+                  v-bind:key="n"
+                >{{$index + minCardYear}}</option>
+              </select>
 
+            </div>
+            <div class="card-form__col -cvv">
+              <label for="cvv2" class="card-input__label">CVV</label>
+              <input
+                type="text"
+                id="cvv2"
+                name="cvv2"
+                autocomplete="cc-csc"
+                class="card-input__input"
+                v-number-only
+                maxlength="4"
+                :value="formData.cardCvv"
+                @input="changeCvv"
+                data-card-field
+
+              />
+            </div>
           </div>
-          <div class="card-form__col -cvv">
-            <label for="cvv2" class="card-input__label">CVV</label>
+        </div>
+        <div class="card-form__row">
+          <div class="card-form__col -cardholder">
+            <label for="nameoncard" class="card-input__label">Name on Card</label>
             <input
               type="text"
-              id="cvv2"
-              name="cvv2"
-              autocomplete="cc-csc"
+              id="nameoncard"
+              name="nameoncard"
+              autocomplete="cc-name"
+              v-letter-only
+              @input="changeName"
               class="card-input__input"
-              v-number-only
-              maxlength="4"
-              :value="formData.cardCvv"
-              @input="changeCvv"
+              :value="formData.cardName"
               data-card-field
-
             />
           </div>
+          <div class="card-form__col -zip">
+              <label for="postal-code" class="card-input__label">Zip Code</label>
+              <input
+                type="tel"
+                class="card-input__input"
+                v-number-only
+                id="postal-code"
+                name="postal-code"
+                autocomplete="postal-code"
+                maxlength="5"
+                :value="formData.cardZipCode"
+                @input="changeZipCode"
+                data-card-field
+
+              />
+            </div>
         </div>
+        <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
       </div>
-      <div class="card-form__row">
-        <div class="card-form__col -cardholder">
-          <label for="nameoncard" class="card-input__label">Name on Card</label>
-          <input
-            type="text"
-            id="nameoncard"
-            name="nameoncard"
-            autocomplete="cc-name"
-            v-letter-only
-            @input="changeName"
-            class="card-input__input"
-            :value="formData.cardName"
-            data-card-field
-          />
-        </div>
-        <div class="card-form__col -zip">
-            <label for="postal-code" class="card-input__label">Zip Code</label>
-            <input
-              type="tel"
-              class="card-input__input"
-              v-number-only
-              id="postal-code"
-              name="postal-code"
-              autocomplete="postal-code"
-              maxlength="5"
-              :value="formData.cardZipCode"
-              @input="changeZipCode"
-              data-card-field
-
-            />
-          </div>
-      </div>
-      <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
-    </div>
-</form>
-<!--
-    <form method="post" id="usrForm">
-
-
-<div>
-  <label for="ccnumber">Credit Card Number</label>
-  <input type="text" id="ccnumber" name="ccnumber" autocomplete="cc-number">
-
-        <label for="ccnumber" class="card-input__label">Card Number</label>
-        <input
-          type="tel"
-          id="ccnumber"
-          name="ccnumber"
-          autocomplete="cc-number"
-          @input="changeNumber"
-          @focus="focusCardNumber"
-          @blur="blurCardNumber"
-          class="card-input__input"
-          :value="formData.cardNumber"
-          :maxlength="cardNumberMaxLength"
-          data-card-field
-        />
-
-</div>
-<div class="card-form__group">
-  <label for="cc-exp-month" class="card-input__label">Expiration Month</label>
-  <select
-    class="card-input__input -select"
-    id="cc-exp-month"
-    name="cc-exp-month"
-    autocomplete="cc-exp-month"
-    v-model="formData.cardMonth"
-    @change="changeMonth"
-    data-card-field
-
-  >
-    <option value disabled selected>MM</option>
-    <option
-      v-bind:value="n < 10 ? '0' + n : n"
-      v-for="n in 12"
-      v-bind:disabled="n < minCardMonth"
-      v-bind:key="n"
-    >{{generateMonthValue(n)}}</option>
-  </select>
-  <label for="cc-exp-month" class="card-input__label">Expiration Year</label>
-  <select
-    class="card-input__input -select"
-    id="cc-exp-year"
-    name="cc-exp-year"
-    autocomplete="cc-exp-year"
-    v-model="formData.cardYear"
-    @change="changeYear"
-    data-card-field
-  >
-    <option value disabled selected>YY</option>
-    <option
-      v-bind:value="$index + minCardYear"
-      v-for="(n, $index) in 12"
-      v-bind:key="n"
-    >{{$index + minCardYear}}</option>
-  </select>
-
-</div>
-
-
-<div>
-  <label for="cc-exp-month">Expiration Month</label>
-  <input type="number" id="cc-exp-month" name="cc-exp-month" autocomplete="cc-exp-month">
-  </div>
-<div>
-  <label for="cc-exp-year">Expiration Year</label>
-  <input type="number" id="cc-exp-year" name="cc-exp-year" autocomplete="cc-exp-year">
-</div>
-<div>
-  <label for="nameoncard">Name on Card</label>
-  <input type="text" id="nameoncard" name="nameoncard" autocomplete="cc-name">
-          <label for="nameoncard" class="card-input__label">Name on Card</label>
-          <input
-            type="text"
-            id="nameoncard"
-            name="nameoncard"
-            autocomplete="cc-name"
-            @input="changeName"
-            class="card-input__input"
-            :value="formData.cardName"
-            data-card-field
-          />
-
-
-</div>
-<div>
-  <label for="cvv2">CVV</label>
-  <input type="text" id="cvv2" name="cvv2" autocomplete="cc-csc">
-</div>
-
-
-</form> -->
+    </form>
   </div>
 </template>
 
@@ -398,36 +301,36 @@ export default {
     },
     blurCardNumber () {
       if (this.isCardNumberMasked) {
-        this.maskCardNumber()
+        // this.maskCardNumber()
       }
     },
-    maskCardNumber () {
-      this.mainCardNumber = this.formData.cardNumber
-      let arr = this.formData.cardNumber.split('')
-      arr.forEach((element, index) => {
-        if (index > 4 && index < 14 && element.trim() !== '') {
-          arr[index] = '*'
-        }
-      })
-      this.formData.cardNumber = arr.join('')
-    },
+    // maskCardNumber () {
+    //   this.mainCardNumber = this.formData.cardNumber
+    //   let arr = this.formData.cardNumber.split('')
+    //   arr.forEach((element, index) => {
+    //     if (index > 4 && index < 14 && element.trim() !== '') {
+    //       arr[index] = '*'
+    //     }
+    //   })
+    //   this.formData.cardNumber = arr.join('')
+    // },
     unMaskCardNumber () {
-      this.formData.cardNumber = this.mainCardNumber
+      // this.formData.cardNumber = this.mainCardNumber
     },
     focusCardNumber () {
-      this.unMaskCardNumber()
-    },
-    toggleMask () {
-      this.isCardNumberMasked = !this.isCardNumberMasked
-      if (this.isCardNumberMasked) {
-        this.maskCardNumber()
-      } else {
-        this.unMaskCardNumber()
-      }
+      // this.unMaskCardNumber()
     }
+    // toggleMask () {
+    //   this.isCardNumberMasked = !this.isCardNumberMasked
+    //   if (this.isCardNumberMasked) {
+    //     this.maskCardNumber()
+    //   } else {
+    //     this.unMaskCardNumber()
+    //   }
+    // }
   },
   mounted () {
-    this.maskCardNumber()
+    // this.maskCardNumber()
   }
 }
 </script>
