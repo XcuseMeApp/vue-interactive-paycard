@@ -298,37 +298,37 @@ export default {
       }
     },
     blurCardNumber () {
-      if (this.isCardNumberMasked) {
-        this.maskCardNumber()
-      }
+      // if (this.isCardNumberMasked) {
+      //   this.maskCardNumber()
+      // }
     },
     maskCardNumber () {
-      this.mainCardNumber = this.formData.cardNumber
-      let arr = this.formData.cardNumber.split('')
-      arr.forEach((element, index) => {
-        if (index > 4 && index < 14 && element.trim() !== '') {
-          arr[index] = '*'
-        }
-      })
-      this.formData.cardNumber = arr.join('')
+      // this.mainCardNumber = this.formData.cardNumber
+      // let arr = this.formData.cardNumber.split('')
+      // arr.forEach((element, index) => {
+      //   if (index > 4 && index < 14 && element.trim() !== '') {
+      //     arr[index] = '*'
+      //   }
+      // })
+      // this.formData.cardNumber = arr.join('')
     },
     unMaskCardNumber () {
-      this.formData.cardNumber = this.mainCardNumber
+      // this.formData.cardNumber = this.mainCardNumber
     },
     focusCardNumber () {
-      this.unMaskCardNumber()
+      // this.unMaskCardNumber()
     },
     toggleMask () {
-      this.isCardNumberMasked = !this.isCardNumberMasked
-      if (this.isCardNumberMasked) {
-        this.maskCardNumber()
-      } else {
-        this.unMaskCardNumber()
-      }
+      // this.isCardNumberMasked = !this.isCardNumberMasked
+      // if (this.isCardNumberMasked) {
+      //   this.maskCardNumber()
+      // } else {
+      //   this.unMaskCardNumber()
+      // }
     }
   },
   mounted () {
-    this.maskCardNumber()
+    // this.maskCardNumber()
   }
 }
 </script>
