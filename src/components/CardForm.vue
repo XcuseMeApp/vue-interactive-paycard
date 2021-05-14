@@ -10,7 +10,7 @@
         :imageBaseUrl="imageBaseUrl"
       />
     </div>
-    <form @submit="preventSubmit" method="post" id="usrForm">
+    <form @submit="preventSubmit" method="post">
       <div class="card-form__inner">
         <div class="card-input">
           <label for="ccnumber" class="card-input__label">Card Number</label>
@@ -90,7 +90,6 @@
                 :value="formData.cardCvv"
                 @input="changeCvv"
                 data-card-field
-
               />
             </div>
           </div>
@@ -123,7 +122,6 @@
                 :value="formData.cardZipCode"
                 @input="changeZipCode"
                 data-card-field
-
               />
             </div>
         </div>
@@ -202,12 +200,12 @@ export default {
   data () {
     return {
       fields: {
-        cardNumber: 'v-card-number',
-        cardName: 'v-card-name',
-        cardMonth: 'v-card-month',
-        cardYear: 'v-card-year',
-        cardCvv: 'v-card-cvv',
-        cardZipCode: 'v-card-zipcode'
+        cardNumber: 'ccnumber',
+        cardName: 'nameoncard',
+        cardMonth: 'cc-exp-month',
+        cardYear: 'cc-exp-year',
+        cardCvv: 'cvv2',
+        cardZipCode: 'postal-code'
       },
       minCardYear: new Date().getFullYear(),
       isCardNumberMasked: true,
@@ -301,36 +299,36 @@ export default {
     },
     blurCardNumber () {
       if (this.isCardNumberMasked) {
-        // this.maskCardNumber()
+        this.maskCardNumber()
       }
     },
-    // maskCardNumber () {
-    //   this.mainCardNumber = this.formData.cardNumber
-    //   let arr = this.formData.cardNumber.split('')
-    //   arr.forEach((element, index) => {
-    //     if (index > 4 && index < 14 && element.trim() !== '') {
-    //       arr[index] = '*'
-    //     }
-    //   })
-    //   this.formData.cardNumber = arr.join('')
-    // },
+    maskCardNumber () {
+      this.mainCardNumber = this.formData.cardNumber
+      let arr = this.formData.cardNumber.split('')
+      arr.forEach((element, index) => {
+        if (index > 4 && index < 14 && element.trim() !== '') {
+          arr[index] = '*'
+        }
+      })
+      this.formData.cardNumber = arr.join('')
+    },
     unMaskCardNumber () {
-      // this.formData.cardNumber = this.mainCardNumber
+      this.formData.cardNumber = this.mainCardNumber
     },
     focusCardNumber () {
-      // this.unMaskCardNumber()
+      this.unMaskCardNumber()
+    },
+    toggleMask () {
+      this.isCardNumberMasked = !this.isCardNumberMasked
+      if (this.isCardNumberMasked) {
+        this.maskCardNumber()
+      } else {
+        this.unMaskCardNumber()
+      }
     }
-    // toggleMask () {
-    //   this.isCardNumberMasked = !this.isCardNumberMasked
-    //   if (this.isCardNumberMasked) {
-    //     this.maskCardNumber()
-    //   } else {
-    //     this.unMaskCardNumber()
-    //   }
-    // }
   },
   mounted () {
-    // this.maskCardNumber()
+    this.maskCardNumber()
   }
 }
 </script>
