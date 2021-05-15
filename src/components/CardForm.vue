@@ -80,7 +80,7 @@
             <div class="card-form__col -cvv">
               <label for="cvv2" class="card-input__label">CVV</label>
               <input
-                type="text"
+                type="tel"
                 id="cvv2"
                 name="cvv2"
                 autocomplete="cc-csc"
@@ -278,18 +278,19 @@ export default {
     },
     submitCard () {
       // check that all fileds are present:
+      console.log(this.formData)
       if (!this.formData.cardName ||
-          !this.mainCardNumber ||
+          !this.formData.cardNumber ||
           !this.formData.cardMonth ||
           !this.formData.cardYear ||
           !this.formData.cardCvv ||
           !this.formData.cardZipCode) {
         this.$emit('error', { title: 'Oops...', message: 'All fields are required.'})
-      } else if (!isValid(this.mainCardNumber)) {
+      } else if (!isValid(this.formData.cardNumber)) {
         this.$emit('error', { title: 'Card number is invalid.', message: 'Please check your input or try another card.'})
       } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear.toString())) {
         this.$emit('error', { title: 'Card has expired.', message: 'Please correct expiration or try another card.'})
-      } else if(!isSecurityCodeValid(this.mainCardNumber, this.formData.cardCvv)) {
+      } else if(!isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
         this.$emit('error', { title: 'Card security code is invalid.', message: 'Please check that you entered it correctly and try again'})
       } else if (this.formData.cardZipCode.length!==5) {
         this.$emit('error', { title: 'Invalid Zip Code.', message: 'Reenter and try again.'})
