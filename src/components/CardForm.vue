@@ -278,7 +278,6 @@ export default {
     },
     submitCard () {
       // check that all fileds are present:
-      console.log(this.formData)
       if (!this.formData.cardName ||
           !this.formData.cardNumber ||
           !this.formData.cardMonth ||
