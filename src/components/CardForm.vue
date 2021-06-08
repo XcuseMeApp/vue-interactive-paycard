@@ -125,7 +125,15 @@
               />
             </div>
         </div>
-        <button class="card-form__button" @click="submitCard">{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</button>
+        <button class="card-form__button" @click="submitCard">
+          <div class="row justify-center items-center">
+          <img :src="`${imageBaseUrl}/lock-white-small.png`" class="q-mr-xs" />
+          <span>{{ total ? `Pay $${total.toFixed(2)}` : 'SUBMIT'}}</span>
+          </div>
+        </button>
+        <div class="row justify-end q-mt-md">
+          <img :src="`${imageBaseUrl}/powered-by-nab.png`" style="width: 50%" class="q-mr-xs" />
+        </div>
       </div>
     </form>
   </div>
