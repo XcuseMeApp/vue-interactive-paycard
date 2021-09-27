@@ -212,7 +212,6 @@ export default {
 
   methods: {
     next(id) {
-      console.log(id)
       document.getElementById(id).focus();
     },
     preventSubmit(event) {
