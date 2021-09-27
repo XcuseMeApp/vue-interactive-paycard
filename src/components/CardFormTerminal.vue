@@ -23,6 +23,7 @@
             @input="changeNumber"
             @focus="focusCardNumber"
             @blur="blurCardNumber"
+            @keyup.enter="next('cc-exp-month')"
             class="card-input__input"
             :value="formData.cardNumber"
             :maxlength="cardNumberMaxLength"
@@ -82,6 +83,7 @@
                 maxlength="4"
                 :value="formData.cardCvv"
                 @input="changeCvv"
+                @keyup.enter="next('nameoncard')"
                 data-card-field
               />
             </div>
@@ -209,6 +211,10 @@ export default {
   },
 
   methods: {
+    next(id) {
+      console.log(id)
+      document.getElementById(id).focus();
+    },
     preventSubmit(event) {
       event.preventDefault()
     },
@@ -245,9 +251,11 @@ export default {
     },
     changeMonth () {
       this.$emit('input-card-month', this.formData.cardMonth)
+      this.next('cc-exp-year')
     },
     changeYear () {
       this.$emit('input-card-year', this.formData.cardYear)
+      this.next('cvv2')
     },
     changeCvv (e) {
       this.formData.cardCvv = e.target.value
