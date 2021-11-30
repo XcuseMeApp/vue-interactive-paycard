@@ -211,7 +211,14 @@ export default {
     },
     visibleFields: {
       type: Array,
-      default: this.allFields
+      default: () => [
+        "ccnumber",
+        "nameoncard",
+        "cc-exp-month",
+        "cc-exp-year",
+        "cvv2",
+        "postal-code"
+      ]
     }
   },
   components: {
@@ -234,9 +241,6 @@ export default {
     }
   },
   computed: {
-    allFields() {
-      return Object.values(this.fields)
-    },
     minCardMonth () {
       if (this.formData.cardYear === this.minCardYear) return new Date().getMonth() + 1
       return 1
