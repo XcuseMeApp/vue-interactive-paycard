@@ -317,15 +317,15 @@ export default {
 
     submitCard () {
       if (!this.areAllFieldsPresent) {
-        this.$emit('error', { title: $t("ooops"), message: $t("allFieldsAreRequired")})
+        this.$emit('error', { title: this.$t("ooops"), message: this.$t("allFieldsAreRequired")})
       } else if (!isValid(this.formData.cardNumber)) {
-        this.$emit('error', { title: $t("cardNumberIsInvalid"), message: $t("pleaseCheckYourInputOrTryAnotherCard")})
+        this.$emit('error', { title: this.$t("cardNumberIsInvalid"), message: this.$t("pleaseCheckYourInputOrTryAnotherCard")})
       } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear.toString())) {
-        this.$emit('error', { title: $t("cardHasExpired"), message: $t("pleaseCorrectExpirationOrTryAnotherCard")})
+        this.$emit('error', { title: this.$t("cardHasExpired"), message: this.$t("pleaseCorrectExpirationOrTryAnotherCard")})
       } else if (this.visibleFields.includes("cvv2") && !isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
-        this.$emit('error', { title: $t("cardSecurityCodeIsInvalid"), message: $t("pleaseCheckThatYouEnteredItCorrectlyAndTryAgain")})
+        this.$emit('error', { title: this.$t("cardSecurityCodeIsInvalid"), message: this.$t("pleaseCheckThatYouEnteredItCorrectlyAndTryAgain")})
       } else if (this.visibleFields.includes("postal-code") && this.formData.cardZipCode.length!==5) {
-        this.$emit('error', { title: $t("invalidPostalCode"), message: $t("reenterAndTryAgain")})
+        this.$emit('error', { title: this.$t("invalidPostalCode"), message: this.$t("reenterAndTryAgain")})
       } else {
         this.$emit('validated')
       }
