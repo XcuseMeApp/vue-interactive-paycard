@@ -2,6 +2,7 @@
   <div class="card-form">
     <div class="card-list">
       <Card
+        dir="ltr"
         :fields="fields"
         :labels="formData"
         :isCardNumberMasked="isCardNumberMasked"
@@ -15,6 +16,7 @@
         <div class="card-input">
           <label for="ccnumber" class="card-input__label">{{ $t("cardNumber") }}</label>
           <input
+            dir="ltr"
             type="tel"
             id="ccnumber"
             name="ccnumber"
@@ -51,7 +53,7 @@
                 data-card-field
 
               >
-                <option value disabled selected>MM</option>
+                <option value disabled selected>{{ $t("mm") }}</option>
                 <option
                   v-bind:value="n < 10 ? '0' + n : n"
                   v-for="n in 12"
@@ -68,7 +70,7 @@
                 @change="changeYear"
                 data-card-field
               >
-                <option value disabled selected>YY</option>
+                <option value disabled selected>{{ $t("yy") }}</option>
                 <option
                   v-bind:value="$index + minCardYear"
                   v-for="(n, $index) in 12"
@@ -80,6 +82,7 @@
             <div v-if="visibleFields.includes('cvv2')" class="card-form__col -cvv">
               <label for="cvv2" class="card-input__label">{{ $t("cvv") }}</label>
               <input
+                dir="ltr"
                 type="tel"
                 id="cvv2"
                 name="cvv2"
@@ -98,6 +101,7 @@
           <div v-if="visibleFields.includes('nameoncard')" class="card-form__col -cardholder">
             <label for="nameoncard" class="card-input__label">{{ $t("nameOnCard") }}</label>
             <input
+              dir="ltr"
               type="text"
               id="nameoncard"
               name="nameoncard"
@@ -112,6 +116,7 @@
           <div v-if="visibleFields.includes('postal-code')" class="card-form__col -zip">
               <label for="postal-code" class="card-input__label">{{ $t("postalCode") }}</label>
               <input
+                dir="ltr"
                 type="tel"
                 class="card-input__input"
                 v-number-only
