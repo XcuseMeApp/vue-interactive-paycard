@@ -77,7 +77,7 @@
               </select>
 
             </div>
-            <div class="card-form__col -cvv">
+            <div v-if="visibleFields.includes('cvv2')" class="card-form__col -cvv">
               <label for="cvv2" class="card-input__label">CVV</label>
               <input
                 type="tel"
@@ -95,7 +95,7 @@
           </div>
         </div>
         <div class="card-form__row">
-          <div class="card-form__col -cardholder">
+          <div v-if="visibleFields.includes('nameoncard')" class="card-form__col -cardholder">
             <label for="nameoncard" class="card-input__label">Name on Card</label>
             <input
               type="text"
@@ -109,7 +109,7 @@
               data-card-field
             />
           </div>
-          <div class="card-form__col -zip">
+          <div v-if="visibleFields.includes('postal-code')" class="card-form__col -zip">
               <label for="postal-code" class="card-input__label">Zip Code</label>
               <input
                 type="tel"
@@ -208,6 +208,10 @@ export default {
     poweredBy: {
       type: String,
       default: ""
+    },
+    visibleFields: {
+      type: Array,
+      default: this.allFields
     }
   },
   components: {
@@ -230,6 +234,9 @@ export default {
     }
   },
   computed: {
+    allFields() {
+      return Object.values(this.fields)
+    },
     minCardMonth () {
       if (this.formData.cardYear === this.minCardYear) return new Date().getMonth() + 1
       return 1
