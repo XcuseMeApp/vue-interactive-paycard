@@ -13,7 +13,7 @@
     <form @submit="preventSubmit" method="post">
       <div class="card-form__inner">
         <div class="card-input">
-          <label for="ccnumber" class="card-input__label">Card Number</label>
+          <label for="ccnumber" class="card-input__label">{{ $t("cardNumber") }}</label>
           <input
             type="tel"
             id="ccnumber"
@@ -40,7 +40,7 @@
         <div class="card-input card-form__row">
           <div class="card-form__col card-form__row">
             <div class="card-form__group">
-              <label for="cc-exp-month" class="card-input__label">Expiration Date</label>
+              <label for="cc-exp-month" class="card-input__label">{{ $t("expirationDate") }}</label>
               <select
                 class="card-input__input -select"
                 id="cc-exp-month"
@@ -78,7 +78,7 @@
 
             </div>
             <div v-if="visibleFields.includes('cvv2')" class="card-form__col -cvv">
-              <label for="cvv2" class="card-input__label">CVV</label>
+              <label for="cvv2" class="card-input__label">{{ $t("cvv") }}</label>
               <input
                 type="tel"
                 id="cvv2"
@@ -96,7 +96,7 @@
         </div>
         <div class="card-form__row">
           <div v-if="visibleFields.includes('nameoncard')" class="card-form__col -cardholder">
-            <label for="nameoncard" class="card-input__label">Name on Card</label>
+            <label for="nameoncard" class="card-input__label">{{ $t("nameOnCard") }}</label>
             <input
               type="text"
               id="nameoncard"
@@ -110,7 +110,7 @@
             />
           </div>
           <div v-if="visibleFields.includes('postal-code')" class="card-form__col -zip">
-              <label for="postal-code" class="card-input__label">Zip Code</label>
+              <label for="postal-code" class="card-input__label">{{ $t("postalCode") }}</label>
               <input
                 type="tel"
                 class="card-input__input"
@@ -128,7 +128,7 @@
         <button class="card-form__button" @click="submitCard">
           <div class="row justify-center items-center">
           <img :src="`${imageBaseUrl}/lock-white-small.png`" class="q-mr-xs" />
-          <span>{{ total ? `Pay ${formattedTotal}` : 'SUBMIT'}}</span>
+          <span>{{ total ? `${$t("pay")} ${formattedTotal}` : $t("submitC") }}</span>
           </div>
         </button>
         <div class="row justify-end q-mt-md">
@@ -303,23 +303,24 @@ export default {
       this.formData.cardZipCode = e.target.value
       this.$emit('input-card-zipcode', this.formData.cardZipCode)
     },
+
+    areAllFieldsPresent() {
+      return Object.keys(this.fields).reduce((acc, key)=> {
+        return acc && (this.formData[key] || !this.visibleFields.includes(this.fields(key)))
+      }, true)
+    },
+
     submitCard () {
-      // check that all fileds are present:
-      if (!this.formData.cardName ||
-          !this.formData.cardNumber ||
-          !this.formData.cardMonth ||
-          !this.formData.cardYear ||
-          !this.formData.cardCvv ||
-          !this.formData.cardZipCode) {
-        this.$emit('error', { title: 'Oops...', message: 'All fields are required.'})
+      if (!this.areAllFieldsPresent) {
+        this.$emit('error', { title: $t("ooops"), message: $t("allFieldsAreRequired")})
       } else if (!isValid(this.formData.cardNumber)) {
-        this.$emit('error', { title: 'Card number is invalid.', message: 'Please check your input or try another card.'})
+        this.$emit('error', { title: $t("cardNumberIsInvalid"), message: $t("pleaseCheckYourInputOrTryAnotherCard")})
       } else if (!isExpirationDateValid(this.formData.cardMonth, this.formData.cardYear.toString())) {
-        this.$emit('error', { title: 'Card has expired.', message: 'Please correct expiration or try another card.'})
-      } else if(!isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
-        this.$emit('error', { title: 'Card security code is invalid.', message: 'Please check that you entered it correctly and try again'})
-      } else if (this.formData.cardZipCode.length!==5) {
-        this.$emit('error', { title: 'Invalid Zip Code.', message: 'Reenter and try again.'})
+        this.$emit('error', { title: $t("cardHasExpired"), message: $t("pleaseCorrectExpirationOrTryAnotherCard")})
+      } else if (this.visibleFields.includes("cvv2") && !isSecurityCodeValid(this.formData.cardNumber, this.formData.cardCvv)) {
+        this.$emit('error', { title: $t("cardSecurityCodeIsInvalid"), message: $t("pleaseCheckThatYouEnteredItCorrectlyAndTryAgain")})
+      } else if (this.visibleFields.includes("postal-code") && this.formData.cardZipCode.length!==5) {
+        this.$emit('error', { title: $t("invalidPostalCode"), message: $t("reenterAndTryAgain")})
       } else {
         this.$emit('validated')
       }
