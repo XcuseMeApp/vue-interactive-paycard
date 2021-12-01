@@ -311,12 +311,12 @@ export default {
 
     areAllFieldsPresent() {
       return Object.keys(this.fields).reduce((acc, key)=> {
-        return acc && (this.formData[key] || !this.visibleFields.includes(this.fields(key)))
+        return acc && (this.formData[key] || !this.visibleFields.includes(this.fields[key]))
       }, true)
     },
 
     submitCard () {
-      if (!this.areAllFieldsPresent) {
+      if (!this.areAllFieldsPresent()) {
         this.$emit('error', { title: this.$t("ooops"), message: this.$t("allFieldsAreRequired")})
       } else if (!isValid(this.formData.cardNumber)) {
         this.$emit('error', { title: this.$t("cardNumberIsInvalid"), message: this.$t("pleaseCheckYourInputOrTryAnotherCard")})
