@@ -342,7 +342,7 @@ export default {
     },
     changeGovId (e) {
       this.formData.cardGovId = e.target.value
-      this.$emit('input-card-id', this.formData.cardGovId)
+      this.$emit('input-card-gov-id', this.formData.cardGovId)
     },
     areAllFieldsPresent() {
       return Object.keys(this.fields).reduce((acc, key)=> {
