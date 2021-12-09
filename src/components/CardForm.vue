@@ -136,8 +136,23 @@
           <span>{{ total ? `${$t("pay")} ${formattedTotal}` : $t("submitC") }}</span>
           </div>
         </button>
-        <div class="row justify-end q-mt-md">
-          <img :src="`${imageBaseUrl}/${poweredBy}`" style="width: 50%" class="q-mr-xs" />
+        <div class="row items-top justify-between q-mt-sm" dir="ltr">
+          <div class="col-auto">
+            <img
+              id="trustwaveSealImage"
+              src="https://sealserver.trustwave.com/seal_image.php?customerId=0a1e32ae5fdf4a4ea59b34d665c3a207&style=invert"
+              border="0"
+              style="cursor:pointer; height: 40px"
+              class="col"
+              onclick="javascript:window.open('https://sealserver.trustwave.com/cert.php?customerId=0a1e32ae5fdf4a4ea59b34d665c3a207&size=105x54&style=invert', 'c_TW', 'location=no, toolbar=no, resizable=yes, scrollbars=yes, directories=no, status=no, width=615, height=720'); return false;"
+              oncontextmenu="javascript:alert('Copying Prohibited by Law - Trusted Commerce is a Service Mark of TrustWave Holdings, Inc.'); return false;"
+              alt="This site is protected by Trustwave's Trusted Commerce program"
+              title="This site is protected by Trustwave's Trusted Commerce program"
+            />
+          </div>
+          <div class="col q-ml-md">
+            <img :src="`${imageBaseUrl}/${poweredBy}`" style="" class="col" />
+          </div>
         </div>
       </div>
     </form>
