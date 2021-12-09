@@ -129,18 +129,18 @@
                 data-card-field
               />
           </div>
-          <div v-if="visibleFields.includes('id')" class="card-form__col -zip">
-            <label for="id" class="card-input__label">{{ $t("id") }}</label>
+          <div v-if="visibleFields.includes('gov-id')" class="card-form__col -zip">
+            <label for="gov-id" class="card-input__label">{{ $t("govId") }}</label>
             <input
               dir="ltr"
               type="tel"
               class="card-input__input"
               v-number-only
-              id="id"
-              name="id"
-              autocomplete="id"
-              :value="formData.id"
-              @input="changeId"
+              id="gov-id"
+              name="gov-id"
+              autocomplete="gov-id"
+              :value="formData.cardGovId"
+              @input="changeGovId"
               data-card-field
             />
           </div>
@@ -220,7 +220,7 @@ export default {
           cardYear: '',
           cardCvv: '',
           cardZipCode: '',
-          cardId: ''
+          cardGovId: ''
         }
       }
     },
@@ -269,7 +269,7 @@ export default {
         cardYear: 'cc-exp-year',
         cardCvv: 'cvv2',
         cardZipCode: 'postal-code',
-        cardId: 'id'
+        cardGovId: 'gov-id'
       },
       minCardYear: new Date().getFullYear(),
       isCardNumberMasked: true,
@@ -340,9 +340,9 @@ export default {
       this.formData.cardZipCode = e.target.value
       this.$emit('input-card-zipcode', this.formData.cardZipCode)
     },
-    changeId (e) {
-      this.formData.cardId = e.target.value
-      this.$emit('input-card-id', this.formData.cardId)
+    changeGovId (e) {
+      this.formData.cardGovId = e.target.value
+      this.$emit('input-card-id', this.formData.cardGovId)
     },
     areAllFieldsPresent() {
       return Object.keys(this.fields).reduce((acc, key)=> {
