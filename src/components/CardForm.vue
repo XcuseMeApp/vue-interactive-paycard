@@ -128,7 +128,22 @@
                 @input="changeZipCode"
                 data-card-field
               />
-            </div>
+          </div>
+          <div v-if="visibleFields.includes('id')" class="card-form__col -zip">
+            <label for="id" class="card-input__label">{{ $t("id") }}</label>
+            <input
+              dir="ltr"
+              type="tel"
+              class="card-input__input"
+              v-number-only
+              id="id"
+              name="id"
+              autocomplete="id"
+              :value="formData.id"
+              @input="changeId"
+              data-card-field
+            />
+          </div>
         </div>
         <button class="card-form__button" @click="submitCard">
           <div class="row justify-center items-center">
@@ -204,7 +219,8 @@ export default {
           cardMonth: '',
           cardYear: '',
           cardCvv: '',
-          cardZipCode: ''
+          cardZipCode: '',
+          cardId: ''
         }
       }
     },
@@ -252,7 +268,8 @@ export default {
         cardMonth: 'cc-exp-month',
         cardYear: 'cc-exp-year',
         cardCvv: 'cvv2',
-        cardZipCode: 'postal-code'
+        cardZipCode: 'postal-code',
+        cardId: 'id'
       },
       minCardYear: new Date().getFullYear(),
       isCardNumberMasked: true,
@@ -323,7 +340,10 @@ export default {
       this.formData.cardZipCode = e.target.value
       this.$emit('input-card-zipcode', this.formData.cardZipCode)
     },
-
+    changeId (e) {
+      this.formData.cardId = e.target.value
+      this.$emit('input-card-id', this.formData.cardId)
+    },
     areAllFieldsPresent() {
       return Object.keys(this.fields).reduce((acc, key)=> {
         return acc && (this.formData[key] || !this.visibleFields.includes(this.fields[key]))
