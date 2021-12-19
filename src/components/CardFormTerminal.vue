@@ -2,20 +2,21 @@
   <div class="card-form">
     <div class="card-list">
       <Card
+        dir="ltr"
         :fields="fields"
         :labels="formData"
         :isCardNumberMasked="isCardNumberMasked"
         :randomBackgrounds="randomBackgrounds"
         :backgroundImage="backgroundImage"
         :imageBaseUrl="imageBaseUrl"
-
       />
     </div>
     <form @submit="preventSubmit" method="post">
       <div class="card-form__inner">
         <div class="card-input">
-          <label for="ccnumber" class="card-input__label">Card Number</label>
+          <label for="ccnumber" class="card-input__label">{{ $t("cardNumber") }}</label>
           <input
+            dir="ltr"
             type="tel"
             id="ccnumber"
             name="ccnumber"
@@ -34,7 +35,7 @@
         <div class="card-input card-form__row">
           <div class="card-form__col card-form__row">
             <div class="card-form__group">
-              <label for="cc-exp-month" class="card-input__label">Expiration Date</label>
+              <label for="cc-exp-month" class="card-input__label">{{ $t("expirationDate") }}</label>
               <select
                 class="card-input__input -select"
                 id="cc-exp-month"
@@ -45,7 +46,7 @@
                 data-card-field
 
               >
-                <option value disabled selected>MM</option>
+                <option value disabled selected>{{ $t("mm") }}</option>
                 <option
                   v-bind:value="n < 10 ? '0' + n : n"
                   v-for="n in 12"
@@ -62,7 +63,7 @@
                 @change="changeYear"
                 data-card-field
               >
-                <option value disabled selected>YY</option>
+                <option value disabled selected>{{ $t("yy") }}</option>
                 <option
                   v-bind:value="$index + minCardYear"
                   v-for="(n, $index) in 12"
@@ -72,8 +73,9 @@
 
             </div>
             <div class="card-form__col -cvv">
-              <label for="cvv2" class="card-input__label">CVV</label>
+              <label for="cvv2" class="card-input__label">{{ $t("cvv") }}</label>
               <input
+                dir="ltr"
                 type="tel"
                 id="cvv2"
                 name="cvv2"
@@ -91,8 +93,9 @@
         </div>
         <div class="card-form__row">
           <div class="card-form__col -cardholder">
-            <label for="nameoncard" class="card-input__label">Name on Card</label>
+            <label for="nameoncard" class="card-input__label">{{ $t("nameOnCard") }}</label>
             <input
+              dir="ltr"
               type="text"
               id="nameoncard"
               name="nameoncard"
