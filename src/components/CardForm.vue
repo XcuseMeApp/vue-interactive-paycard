@@ -165,7 +165,8 @@
               title="This site is protected by Trustwave's Trusted Commerce program"
             />
           </div>
-          <div class="col q-ml-md">
+          <div class="col" />
+          <div class="col-auto q-ml-md">
             <img :src="`${imageBaseUrl}/${poweredBy}`" style="" class="col" />
           </div>
         </div>
