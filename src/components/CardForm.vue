@@ -151,7 +151,7 @@
           <span>{{ total ? `${$t("pay")} ${formattedTotal}` : $t("submitC") }}</span>
           </div>
         </button>
-        <div class="row items-top justify-between q-mt-sm" dir="ltr">
+        <div class="row items-center justify-between q-mt-sm" dir="ltr">
           <div class="col-auto">
             <img
               id="trustwaveSealImage"
@@ -167,7 +167,7 @@
           </div>
           <div class="col" />
           <div class="col-auto q-ml-md">
-            <img :src="`${imageBaseUrl}/${poweredBy}`" style="" class="col" />
+            <img :src="`${imageBaseUrl}/${poweredBy}`" style="max-width: 190px" class="col" />
           </div>
         </div>
       </div>
