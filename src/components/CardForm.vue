@@ -167,7 +167,7 @@
           </div>
           <div class="col" />
           <div class="col-auto q-ml-md">
-            <img :src="`${imageBaseUrl}/${poweredBy}`" style="max-width: 190px" class="col" />
+            <img :src="`${imageBaseUrl}/${poweredBy}`" style="max-width: 150px" class="col" />
           </div>
         </div>
       </div>
