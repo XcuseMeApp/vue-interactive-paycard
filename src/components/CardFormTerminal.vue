@@ -1,6 +1,6 @@
 <template>
-  <div class="card-form">
-    <div class="card-list">
+  <div class="card-form row" style="max-width: 100%">
+    <div class="col-auto card-list q-mr-md">
       <Card
         dir="ltr"
         :fields="fields"
@@ -11,8 +11,8 @@
         :imageBaseUrl="imageBaseUrl"
       />
     </div>
-    <form @submit="preventSubmit" method="post">
-      <div class="card-form__inner">
+    <form @submit="preventSubmit" method="post" class="col" >
+      <div class="card-form__inner" style="padding: 38px 30px">
         <div class="card-input">
           <label for="ccnumber" class="card-input__label">{{ $t("cardNumber") }}</label>
           <input
