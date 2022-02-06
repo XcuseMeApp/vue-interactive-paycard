@@ -1,6 +1,6 @@
 <template>
   <div class="card-form">
-    <div class="card-list">
+    <div v-if="showCardImage" class="card-list">
       <Card
         dir="ltr"
         :fields="fields"
@@ -12,7 +12,7 @@
       />
     </div>
     <form @submit="preventSubmit" method="post">
-      <div class="card-form__inner">
+      <div class="card-form__inner" :style="showCardImage ? '' : 'padding-top: 0px;'">
         <div class="card-input">
           <label for="ccnumber" class="card-input__label">{{ $t("cardNumber") }}</label>
           <input
@@ -233,6 +233,10 @@ export default {
     imageBaseUrl: {
       type: String,
       default: "../assets/images"
+    },
+    showCardImage: {
+      type: Boolean,
+      default: true
     },
     total: {
       type: Number,
